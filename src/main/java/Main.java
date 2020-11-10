@@ -7,7 +7,9 @@ import DataLayer.BankAccountDataManager;
 import DataLayer.TransactionDataManager;
 import DataLayer.UserDataManager;
 import Logging.ConsoleLogger;
+import Logging.FileLogger;
 import Logging.Logger;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,12 +24,12 @@ import java.util.Date;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
-        Logger logger = new ConsoleLogger();
+        Logger logger = new FileLogger();
 
         BankAccountDataManager bankAccountDm = new BankAccountDataManager();
-        UserDataManager userDm = new UserDataManager();
+        UserDataManager userDm = new UserDataManager(logger);
         TransactionDataManager transactionDm = new TransactionDataManager();
 
         User user1 = new User(1, "John", "Kuefler", "john@test.com", "password123");
@@ -51,6 +53,10 @@ public class Main {
         logger.logInfo("Creating transactions");
         transactionDm.create(trans1);
 
+        logger.logInfo("Retrieving users");
+        ArrayList<User> allUsers = userDm.getAll();
+        System.out.println(allUsers);
+        
         logger.logInfo("Retreiving accounts");
         ArrayList<BankAccount> johnsAccounts = bankAccountDm.getByUserId(1);
         System.out.println(johnsAccounts);
