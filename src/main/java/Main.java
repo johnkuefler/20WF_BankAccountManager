@@ -26,7 +26,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        Logger logger = new FileLogger();
+        Logger logger = new ConsoleLogger();
 
         BankAccountDataManager bankAccountDm = new BankAccountDataManager();
         UserDataManager userDm = new UserDataManager(logger);
