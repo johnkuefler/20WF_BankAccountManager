@@ -25,6 +25,10 @@ public class TransactionDataManager {
         return transToCreate;
     }
     
+    public ArrayList<Transaction> getAll() {
+        return this.transactions;
+    }
+    
     public ArrayList<Transaction> getByBankAccountId(int bankAccountNumber) {
         ArrayList<Transaction> output = new ArrayList<Transaction>();
         
